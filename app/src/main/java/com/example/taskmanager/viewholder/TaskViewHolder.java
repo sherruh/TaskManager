@@ -27,10 +27,12 @@ public class TaskViewHolder extends RecyclerView.ViewHolder  {
     public void onBind(Task task){
         taskDescription.setText(task.getDecriprion());
         taskTitle.setText(task.getTitle());
-        Picasso.get().load("http://i.imgur.com/"+ String.valueOf(task.getImageId())+".jpg").resize(150, 150)
+        Picasso.get().load("http://i.imgur.com/"+ String.valueOf(task.getImageId())+".jpg").
+                resize(150, 150)
                 .centerCrop().into(taskImage);
 
-        Log.d("TaskManagerLog","Image URL:  http://i.imgur.com/"+ String.valueOf(task.getImageId())+".jpg");
+        Log.d("TaskManagerLog","Image URL:  http://i.imgur.com/"+
+                String.valueOf(task.getImageId())+".jpg");
         taskId= task.getTaskId();
 
     }
