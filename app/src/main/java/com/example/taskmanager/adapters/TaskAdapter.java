@@ -37,11 +37,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder>  {
     public void onBindViewHolder(@NonNull TaskViewHolder taskViewHolder, int i) {
         Log.d("TaskManagerLog","Size of list: " +String.valueOf( tasks.size()));
         Log.d("TaskManagerLog","onBind "+i);
-        taskViewHolder.onBind(tasks.get(i%tasks.size()));
+        if(tasks.size()>0){
+            taskViewHolder.onBind(tasks.get(i%tasks.size()));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 999999;
+        return tasks.size();
+        //return tasks.size()*999;
     }
 }

@@ -1,19 +1,20 @@
 package com.example.taskmanager.models;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Task {
+public class Task implements Serializable {
 
     String title;
     String decriprion;
     int taskId;
     int imageId;
 
-    public Task(String title, String decriprion, int taskId) {
+    public Task(String title, String decriprion, int taskImage) {
         this.title = title;
         this.decriprion = decriprion;
-        this.taskId = taskId;
-        imageId=new Random().nextInt(99999)+10000;
+        //this.taskId = taskId;
+        imageId=taskImage+(new Random().nextInt(99999)+10000);
     }
 
     public String getTitle() {
