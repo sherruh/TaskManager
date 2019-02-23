@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.taskmanager.R;
+import com.example.taskmanager.interfaces.IOnClickListener;
 import com.example.taskmanager.models.Task;
 import com.example.taskmanager.viewholder.TaskViewHolder;
 
@@ -17,10 +18,11 @@ import java.util.List;
 public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder>  {
 
     ArrayList<Task> tasks;
+    IOnClickListener miOnClickListener;
 
-    public TaskAdapter(ArrayList<Task> tasks){
+    public TaskAdapter(ArrayList<Task> tasks,IOnClickListener iOnClickListener){
         this.tasks=tasks;
-
+        miOnClickListener=iOnClickListener;
     }
 
     @NonNull
@@ -28,7 +30,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder>  {
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v= LayoutInflater.from(viewGroup.getContext()).
                 inflate(R.layout.view_holder_task,viewGroup,false);
-        TaskViewHolder vh=new TaskViewHolder(v);
+        TaskViewHolder vh=new TaskViewHolder(v,miOnClickListener);
         Log.d("TaskManagerLog","created "+i);
         return vh;
     }
@@ -38,7 +40,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder>  {
         Log.d("TaskManagerLog","Size of list: " +String.valueOf( tasks.size()));
         Log.d("TaskManagerLog","onBind "+i);
         if(tasks.size()>0){
-            taskViewHolder.onBind(tasks.get(i%tasks.size()));
+            taskViewHolder.onBind(tasks.get(i%tasks.size()),i);
         }
     }
 

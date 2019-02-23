@@ -12,13 +12,14 @@ import android.widget.Button;
 
 import com.example.taskmanager.R;
 import com.example.taskmanager.adapters.TaskAdapter;
+import com.example.taskmanager.interfaces.IOnClickListener;
 import com.example.taskmanager.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IOnClickListener {
 
     RecyclerView recyclerViewTasks;
     RecyclerView.LayoutManager recycleLayoutManager;
@@ -33,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         tasks=setTasks();
         initRecyclerView(tasks);
         buttonAddTask=findViewById(R.id.add_tsk_bth);
-        taskAdapter=new TaskAdapter(tasks);
+        taskAdapter=new TaskAdapter(tasks,this);
     }
 
     private ArrayList<Task> setTasks() {
         ArrayList<Task> tasks=new ArrayList<>();
-        //tasks.add(new Task("Task 1","Text of task",1));
-        //tasks.add(new Task("Task 2","Text of task",2));
-        //tasks.add(new Task("Task 3","Text of task",3));
+        tasks.add(new Task("Task 1","Text of task",1));
+        tasks.add(new Task("Task 2","Text of task",2));
+        tasks.add(new Task("Task 3","Text of task",3));
         //tasks.add(new Task("Task 4","Text of task",4));
         //tasks.add(new Task("Task 5","Text of task",5));
         //tasks.add(new Task("Task 6","Text of task",6));
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView(ArrayList<Task> tasks) {//TODO приходится вызывать метод после закрытия Activity2
         recyclerViewTasks=findViewById(R.id.recyclerTasks);
         recycleLayoutManager=new LinearLayoutManager(this);
-        taskAdapter=new TaskAdapter(tasks);
+        taskAdapter=new TaskAdapter(tasks,this);
         recyclerViewTasks=findViewById(R.id.recyclerTasks);
         recyclerViewTasks.setAdapter(taskAdapter);
         recyclerViewTasks.setLayoutManager(recycleLayoutManager);
@@ -83,5 +84,11 @@ public class MainActivity extends AppCompatActivity {
             tasks.add(task);
             initRecyclerView(tasks);
         }
+    }
+
+
+    @Override
+    public void clickOnTask(int taskId) {
+        Log.d("TaskManagerLog","task id: "+taskId);
     }
 }

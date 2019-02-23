@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.taskmanager.R;
+import com.example.taskmanager.interfaces.IOnClickListener;
 import com.example.taskmanager.models.Task;
 import com.squareup.picasso.Picasso;
 
@@ -16,15 +17,23 @@ public class TaskViewHolder extends RecyclerView.ViewHolder  {
     TextView taskDescription;
     ImageView taskImage;
     int taskId;
+    private IOnClickListener miOnClickListener;
 
-    public TaskViewHolder(@NonNull View itemView) {
+    public TaskViewHolder(@NonNull View itemView,IOnClickListener iOnClickListener) {
         super(itemView);
         taskTitle=itemView.findViewById(R.id.vh_task_Title);
         taskDescription=itemView.findViewById(R.id.textOfTask);
         taskImage=itemView.findViewById(R.id.imageView);
+        miOnClickListener=iOnClickListener;
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miOnClickListener.clickOnTask(taskId);
+            }
+        });
     }
 
-    public void onBind(Task task){
+    public void onBind(Task task,int taskId){
         taskDescription.setText(task.getDecriprion());
         taskTitle.setText(task.getTitle());
         Picasso.get().load("http://i.imgur.com/"+ String.valueOf(task.getImageId())+".jpg").
@@ -33,7 +42,8 @@ public class TaskViewHolder extends RecyclerView.ViewHolder  {
 
         Log.d("TaskManagerLog","Image URL:  http://i.imgur.com/"+
                 String.valueOf(task.getImageId())+".jpg");
-        taskId= task.getTaskId();
-
+        this.taskId=taskId;
     }
+
+
 }
