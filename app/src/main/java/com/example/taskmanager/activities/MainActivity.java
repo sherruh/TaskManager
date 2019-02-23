@@ -15,6 +15,7 @@ import com.example.taskmanager.adapters.TaskAdapter;
 import com.example.taskmanager.interfaces.IOnClickListener;
 import com.example.taskmanager.models.Task;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,5 +91,8 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
     @Override
     public void clickOnTask(int taskId) {
         Log.d("TaskManagerLog","task id: "+taskId);
+        Intent intent=new Intent(this,Activity3.class);
+        intent.putExtra(Activity2.TASK_KEY, (Serializable)tasks.get(taskId));
+        startActivity(intent);
     }
 }
