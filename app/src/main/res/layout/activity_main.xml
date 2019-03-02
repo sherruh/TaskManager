@@ -7,29 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/recyclerTasks"
+   <FrameLayout
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintHorizontal_bias="0.0"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintVertical_bias="0.0"
-       >
-   </android.support.v7.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/add_tsk_bth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="addNewTask"
-        android:text="New Task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-         />
+       android:id="@+id/frame_layout"
+       tools:ignore="MissingConstraints"></FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
