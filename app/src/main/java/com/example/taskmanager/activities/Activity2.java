@@ -16,84 +16,84 @@ import java.io.Serializable;
 
 public class Activity2 extends AppCompatActivity {
 
-    String taskTitle;
-    String taskDescription;
-    int taskImage;
-
-    EditText etTaskTitle;
-    EditText etTaskDescription;
-    EditText etImage;
-
-    static final String TASK_KEY="Task";
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity2);
-        etTaskTitle=findViewById(R.id.task_title_edit_text);
-        etTaskDescription=findViewById(R.id.task_description_edit_text);
-        etImage=findViewById(R.id.task_image_edit_text);
-        addTextChangeListener();
-
-    }
-
-    private void addTextChangeListener() {
-        etTaskTitle.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                taskTitle=etTaskTitle.getText().toString();
-            }
-        });
-        etTaskDescription.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                taskDescription=etTaskDescription.getText().toString();
-            }
-        });
-        etImage.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String temp=etImage.getText().toString();
-                taskImage=Integer.parseInt(temp);
-            }
-        });
-    }
-
-   // void onSaveTask(View view) {
-   //     Task newTask=new Task(taskTitle,taskDescription,taskImage);
-   //     Intent intent=new Intent();
-   //     intent.putExtra(TASK_KEY, (Serializable) newTask);
-   //     setResult(RESULT_OK,intent);
-   //     finish();
+   // String taskTitle;
+   // String taskDescription;
+   // int taskImage;
+//
+   // EditText etTaskTitle;
+   // EditText etTaskDescription;
+   // EditText etImage;
+//
+   // static final String TASK_KEY="Task";
+//
+   // @Override
+   // protected void onCreate(@Nullable Bundle savedInstanceState) {
+   //     super.onCreate(savedInstanceState);
+   //     setContentView(R.layout.activity2);
+   //     etTaskTitle=findViewById(R.id.task_title_edit_text);
+   //     etTaskDescription=findViewById(R.id.task_description_edit_text);
+   //     etImage=findViewById(R.id.task_image_edit_text);
+   //     addTextChangeListener();
+//
    // }
+//
+   // private void addTextChangeListener() {
+   //     etTaskTitle.addTextChangedListener(new TextWatcher() {
+   //         @Override
+   //         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+   //         }
+//
+   //         @Override
+   //         public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+   //         }
+//
+   //         @Override
+   //         public void afterTextChanged(Editable s) {
+   //             taskTitle=etTaskTitle.getText().toString();
+   //         }
+   //     });
+   //     etTaskDescription.addTextChangedListener(new TextWatcher() {
+   //         @Override
+   //         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+   //         }
+//
+   //         @Override
+   //         public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+   //         }
+//
+   //         @Override
+   //         public void afterTextChanged(Editable s) {
+   //             taskDescription=etTaskDescription.getText().toString();
+   //         }
+   //     });
+   //     etImage.addTextChangedListener(new TextWatcher() {
+   //         @Override
+   //         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+   //         }
+//
+   //         @Override
+   //         public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+   //         }
+//
+   //         @Override
+   //         public void afterTextChanged(Editable s) {
+   //             String temp=etImage.getText().toString();
+   //             taskImage=Integer.parseInt(temp);
+   //         }
+   //     });
+   // }
+//
+   //// void onSaveTask(View view) {
+   ////     Task newTask=new Task(taskTitle,taskDescription,taskImage);
+   ////     Intent intent=new Intent();
+   ////     intent.putExtra(TASK_KEY, (Serializable) newTask);
+   ////     setResult(RESULT_OK,intent);
+   ////     finish();
+   //// }
 }

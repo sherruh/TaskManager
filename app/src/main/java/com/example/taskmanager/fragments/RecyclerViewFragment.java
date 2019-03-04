@@ -1,5 +1,6 @@
 package com.example.taskmanager.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.taskmanager.R;
+import com.example.taskmanager.activities.Activity3;
 import com.example.taskmanager.activities.MainActivity;
 import com.example.taskmanager.adapters.TaskAdapter;
 import com.example.taskmanager.interfaces.IOnClickListener;
@@ -20,13 +23,14 @@ import com.example.taskmanager.models.Task;
 
 import java.util.ArrayList;
 
-public class RecyclerViewFragment extends Fragment implements IOnClickListener {
+public class RecyclerViewFragment extends Fragment  {
     RecyclerView recyclerViewTasks;
     RecyclerView.LayoutManager recycleLayoutManager;
     TaskAdapter taskAdapter;
     Button buttonAddTask;
     ArrayList<Task> tasks;
     View view;
+    IOnClickListener miOnClickListener;
 
     @Nullable
     @Override
@@ -40,7 +44,7 @@ public class RecyclerViewFragment extends Fragment implements IOnClickListener {
         recyclerViewTasks= (RecyclerView) view.findViewById(R.id.recyclerTasks);
         recycleLayoutManager=new LinearLayoutManager(getActivity());
         recyclerViewTasks.setLayoutManager(recycleLayoutManager);
-        taskAdapter=new TaskAdapter(tasks,this  );
+        taskAdapter=new TaskAdapter(tasks,miOnClickListener  );
         recyclerViewTasks.setAdapter(taskAdapter);
         recyclerViewTasks.setItemAnimator(new DefaultItemAnimator());
         buttonAddTask=view.findViewById(R.id.add_tsk_bth);
@@ -75,9 +79,13 @@ public class RecyclerViewFragment extends Fragment implements IOnClickListener {
         initRecycleView(view);
     }
 
-    @Override
-    public void clickOnTask(int taskId) {
-
+    public void setIOnClicklistener(IOnClickListener iOnClicklistener){
+        miOnClickListener=iOnClicklistener;
     }
+
+    public Task getTask(int taskId){
+        return tasks.get(taskId);
+    }
+
 
 }

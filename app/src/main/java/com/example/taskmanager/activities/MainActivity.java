@@ -19,6 +19,7 @@ import com.example.taskmanager.R;
 import com.example.taskmanager.adapters.TaskAdapter;
 import com.example.taskmanager.fragments.NewTaskFragment;
 import com.example.taskmanager.fragments.RecyclerViewFragment;
+import com.example.taskmanager.fragments.TaskViewFragment;
 import com.example.taskmanager.interfaces.IOnClickListener;
 import com.example.taskmanager.models.Task;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
     FragmentTransaction fragmentTransaction;
     RecyclerViewFragment recyclerViewFragment;
     NewTaskFragment newTaskFragment;
+    TaskViewFragment taskViewFragment;
 
     String taskTitle;
     String taskDescription;
@@ -47,17 +49,14 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         fragmentManager=getSupportFragmentManager();
         fragmentTransaction=fragmentManager.beginTransaction();
         recyclerViewFragment=new RecyclerViewFragment();
         recyclerViewFragment.setTasks();
+        recyclerViewFragment.setIOnClicklistener(this);
         fragmentTransaction.add(R.id.frame_layout,recyclerViewFragment);
         fragmentTransaction.commit();
-
     }
-
-
 
     public void addNewTask(View v){
         fragmentTransaction=fragmentManager.beginTransaction();
@@ -67,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
         newTaskFragment=new NewTaskFragment();
         fragmentTransaction.add(R.id.frame_layout,newTaskFragment);
         fragmentTransaction.commit();
-
-
     }
 
     public void onSaveTask(View v){
@@ -81,24 +78,26 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
         fragmentTransaction.commit();
     }
 
-
-
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-            Task task=(Task)data.getSerializableExtra(Activity2.TASK_KEY);
-            tasks.add(task);
-           // initRecyclerView(tasks);
-        }
+    public void clickOnTask(int taskId) {
+        Log.d("TaskManagerLog","Clicked on "+taskId);
+        fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.remove(recyclerViewFragment);
+        fragmentTransaction.commit();
+        fragmentTransaction=fragmentManager.beginTransaction();
+        taskViewFragment=new TaskViewFragment();
+        taskViewFragment.setTask(recyclerViewFragment.getTask(taskId));
+        fragmentTransaction.add(R.id.frame_layout,taskViewFragment);
+        fragmentTransaction.addToBackStack(null).commit();
     }
 
     @Override
-    public void clickOnTask(int taskId) {
-        Log.d("TaskManagerLog","task id: "+taskId);
-        Intent intent=new Intent(this,Activity3.class);
-        intent.putExtra(Activity2.TASK_KEY, (Serializable)tasks.get(taskId));
-        startActivity(intent);
+    public void onBackPressed() {
+        fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.remove(taskViewFragment);
+        fragmentTransaction.commit();
+        fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frame_layout,recyclerViewFragment);
+        fragmentTransaction.commit();
     }
 }
