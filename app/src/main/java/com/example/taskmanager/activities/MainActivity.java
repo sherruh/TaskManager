@@ -37,14 +37,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
     NewTaskFragment newTaskFragment;
     TaskViewFragment taskViewFragment;
 
-    String taskTitle;
-    String taskDescription;
-    int taskImage;
-
-    EditText etTaskTitle;
-    EditText etTaskDescription;
-    EditText etImage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
