@@ -26,27 +26,28 @@ public class RecyclerViewFragment extends Fragment implements IOnClickListener {
     TaskAdapter taskAdapter;
     Button buttonAddTask;
     ArrayList<Task> tasks;
+    View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_recyclerview,container,false);
-        recyclerViewTasks= (RecyclerView) view.findViewById(R.id.recyclerTasks);
-        recycleLayoutManager=new LinearLayoutManager(getActivity());
-        recyclerViewTasks.setLayoutManager(recycleLayoutManager);
-
-        tasks=setTasks();
-        taskAdapter=new TaskAdapter(tasks,this  );
-        recyclerViewTasks.setAdapter(taskAdapter);
-
-        recyclerViewTasks.setItemAnimator(new DefaultItemAnimator());
-
+        view=inflater.inflate(R.layout.fragment_recyclerview,container,false);
+        initRecycleView(view);
         return view;
     }
 
+    private void initRecycleView(View view) {
+        recyclerViewTasks= (RecyclerView) view.findViewById(R.id.recyclerTasks);
+        recycleLayoutManager=new LinearLayoutManager(getActivity());
+        recyclerViewTasks.setLayoutManager(recycleLayoutManager);
+        taskAdapter=new TaskAdapter(tasks,this  );
+        recyclerViewTasks.setAdapter(taskAdapter);
+        recyclerViewTasks.setItemAnimator(new DefaultItemAnimator());
+        buttonAddTask=view.findViewById(R.id.add_tsk_bth);
+    }
 
-    private ArrayList<Task> setTasks() {
-        ArrayList<Task> tasks=new ArrayList<>();
+    public void setTasks() {
+       tasks=new ArrayList<>();
         tasks.add(new Task("Task 1","Text of task",1));
         tasks.add(new Task("Task 2","Text of task",2));
         tasks.add(new Task("Task 3","Text of task",3));
@@ -67,11 +68,16 @@ public class RecyclerViewFragment extends Fragment implements IOnClickListener {
         //tasks.add(new Task("Task 18","Text of task",18));
         //tasks.add(new Task("Task 19","Text of task",19));
         //tasks.add(new Task("Task 20","Text of task",20));
-        return tasks;
+    }
+
+    public void addTask(Task task){
+        tasks.add(task);
+        initRecycleView(view);
     }
 
     @Override
     public void clickOnTask(int taskId) {
 
     }
+
 }

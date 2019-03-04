@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:onClick="addNewTask"
         android:text="New Task"
-        android:layout_below="@id/recyclerTasks"
         android:layout_toRightOf="@id/recyclerTasks"
+        android:layout_marginTop="400dp"
         />
 
 </RelativeLayout>

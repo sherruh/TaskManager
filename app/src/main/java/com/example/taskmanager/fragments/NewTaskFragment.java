@@ -1,20 +1,20 @@
-package com.example.taskmanager.activities;
+package com.example.taskmanager.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.taskmanager.R;
 import com.example.taskmanager.models.Task;
 
-import java.io.Serializable;
-
-public class Activity2 extends AppCompatActivity {
+public class NewTaskFragment extends Fragment {
 
     String taskTitle;
     String taskDescription;
@@ -24,20 +24,19 @@ public class Activity2 extends AppCompatActivity {
     EditText etTaskDescription;
     EditText etImage;
 
-    static final String TASK_KEY="Task";
-
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity2);
-        etTaskTitle=findViewById(R.id.task_title_edit_text);
-        etTaskDescription=findViewById(R.id.task_description_edit_text);
-        etImage=findViewById(R.id.task_image_edit_text);
-        addTextChangeListener();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_add_new_task,container,false);
+        etTaskTitle=view.findViewById(R.id.task_title_edit_text);
+        etTaskDescription=view.findViewById(R.id.task_description_edit_text);
+        etImage=view.findViewById(R.id.task_image_edit_text);
+        addTextListener();
 
+        return view;
     }
 
-    private void addTextChangeListener() {
+    private void addTextListener() {
         etTaskTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,13 +86,12 @@ public class Activity2 extends AppCompatActivity {
                 taskImage=Integer.parseInt(temp);
             }
         });
+
     }
 
-   // void onSaveTask(View view) {
-   //     Task newTask=new Task(taskTitle,taskDescription,taskImage);
-   //     Intent intent=new Intent();
-   //     intent.putExtra(TASK_KEY, (Serializable) newTask);
-   //     setResult(RESULT_OK,intent);
-   //     finish();
-   // }
+    public Task getTask(){
+        return new Task(taskTitle,taskDescription,taskImage);
+    }
+
+
 }
